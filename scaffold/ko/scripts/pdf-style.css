@@ -1,0 +1,54 @@
+/* ──────────────────────────────────────────────
+   spec-repo PDF Style — 한글 폰트 + 기본 타이포그래피
+   ────────────────────────────────────────────── */
+
+/* 1. 한글 웹폰트 (Noto Sans KR) — Chromium이 PDF 생성 시 로드 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap');
+
+/* 2. 기본 */
+body {
+  font-family:
+    'Noto Sans KR',
+    'Apple SD Gothic Neo',
+    'Malgun Gothic',
+    '맑은 고딕',
+    NanumGothic,
+    'Noto Sans CJK KR',
+    sans-serif;
+  font-size: 10pt;
+  line-height: 1.6;
+  color: #111;
+}
+
+/* 3. 제목 */
+h1 { font-size: 20pt; font-weight: 700; margin: 0 0 8mm; }
+h2 { font-size: 13pt; font-weight: 700; margin: 6mm 0 3mm; }
+h3 { font-size: 11pt; font-weight: 700; margin: 4mm 0 2mm; }
+
+/* 4. 표 */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+th, td {
+  border: 1px solid #666;
+  padding: 3px 5px;
+  vertical-align: top;
+}
+th {
+  background-color: #D9E1F2;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* 5. 페이지 나누기 */
+.page-break {
+  page-break-after: always;
+}
+
+/* 6. 코드 */
+code, pre {
+  font-family: 'Courier New', monospace;
+  font-size: 9pt;
+  background: #f5f5f5;
+}

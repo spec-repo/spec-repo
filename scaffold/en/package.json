@@ -1,0 +1,8 @@
+{
+  "name": "spec-repo",
+  "private": true,
+  "description": "SI project spec document repository",
+  "dependencies": {
+    "pdf-parse": "^2.4.5"
+  }
+}

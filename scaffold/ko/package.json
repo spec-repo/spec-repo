@@ -1,0 +1,8 @@
+{
+  "name": "spec-repo",
+  "private": true,
+  "description": "SI 프로젝트 산출물 문서 저장소",
+  "dependencies": {
+    "pdf-parse": "^2.4.5"
+  }
+}

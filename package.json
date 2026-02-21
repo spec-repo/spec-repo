@@ -1,0 +1,19 @@
+{
+  "name": "spec-repo",
+  "version": "0.1.0",
+  "description": "AI-friendly spec document management CLI for SI projects",
+  "main": "bin/spec-repo.js",
+  "bin": {
+    "spec-repo": "./bin/spec-repo.js"
+  },
+  "scripts": {
+    "dev": "node bin/spec-repo.js"
+  },
+  "keywords": ["spec", "documentation", "cli", "agent-skill"],
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "commander": "^14.0.3",
+    "pdf-parse": "^2.4.5"
+  }
+}
