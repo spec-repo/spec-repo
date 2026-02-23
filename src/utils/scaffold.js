@@ -46,6 +46,13 @@ function scaffoldProject(targetDir, projectName) {
     fs.writeFileSync(filePath, content);
   }
 
+  // skills/ → .agents/skills/ + .claude/skills/ 복사
+  const skillsSrc = path.join(__dirname, '../../skills');
+  if (fs.existsSync(skillsSrc)) {
+    copyDir(skillsSrc, path.join(targetDir, '.agents', 'skills'));
+    copyDir(skillsSrc, path.join(targetDir, '.claude', 'skills'));
+  }
+
   // scripts 실행 권한 부여
   const scriptsDir = path.join(targetDir, 'scripts');
   if (fs.existsSync(scriptsDir)) {
