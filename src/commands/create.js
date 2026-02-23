@@ -65,6 +65,17 @@ create
       // 설치 실패해도 프로젝트 생성은 계속 진행
     }
 
+    // 에이전트 스킬 설치 (claude-code, codex, antigravity)
+    const skillsDir = path.join(__dirname, '../..');
+    try {
+      execSync(
+        `npx --yes skills add "${skillsDir}" --skill specrepo-intake --skill specrepo-review -a claude-code -a codex -a antigravity --copy -y`,
+        { cwd: targetDir, stdio: 'ignore' }
+      );
+    } catch {
+      // 스킬 설치 실패해도 프로젝트 생성은 계속 진행
+    }
+
     if (options.git) {
       const { execSync } = require('child_process');
       try {
