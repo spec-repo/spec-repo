@@ -1,6 +1,6 @@
 ---
 name: specrepo-review
-description: 문서 검토 완료 또는 고객 승인 태그를 생성하고 PDF 스냅샷을 만듭니다. 사용법: /specrepo-review [approved] <문서명>
+description: "문서 검토 완료 또는 고객 승인 태그를 생성하고 PDF 스냅샷을 만듭니다. 사용법: /specrepo-review [approved] <문서명>"
 metadata:
   author: spec-repo
   version: "1.0"
