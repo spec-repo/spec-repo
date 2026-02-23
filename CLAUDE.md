@@ -11,10 +11,9 @@ bin/spec-repo.js          진입점 (commander)
 src/commands/create.js    spec-repo create 구현
 src/commands/intake.js    spec-repo intake 구현
 src/utils/scaffold.js     파일 복사 + 플레이스홀더 치환
-scaffold/                 한국어 스캐폴드 원본 (단일)
-scaffold/.claude/commands/  Claude 슬래시 커맨드 (intake, review)
-scaffold/.gemini/commands/  Gemini 슬래시 커맨드
-scaffold/.github/agents/    Copilot 에이전트 커맨드
+scaffold/                       한국어 스캐폴드 원본 (단일)
+scaffold/.claude/skills/        Claude 에이전트 스킬 (specrepo-intake, specrepo-review)
+scaffold/.agents/skills/        범용 에이전트 스킬 (Gemini, Copilot 등)
 ```
 
 ## 커맨드 동작 요약
