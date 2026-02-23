@@ -1,15 +1,60 @@
 # spec-repo
 
-SI 프로젝트의 산출물 문서를 **AI 에이전트와 함께 관리**하기 위한 CLI 도구.
-
-RFP를 받는 순간부터 요구사항 분석, 설계서 작성, 고객 납품까지 — 에이전트가 스펙 문서를 직접 읽고 쓸 수 있는 구조를 한 번에 세팅합니다.
+개발 프로젝트의 **코드 외 산출물 문서를 Git으로 관리**하고, 이를 AI 에이전트의 **지식 베이스**로 활용하기 위한 scaffold 도구.
 
 ---
 
-## 설치
+## 철학
+
+소프트웨어 개발 프로젝트에서 생산되는 산출물은 크게 두 가지다.
+
+- **소스코드** — 개발 리포지토리에서 Git으로 관리
+- **문서 산출물** — 요구사항정의서, 화면설계서, DB설계서, API명세서, 테스트케이스 등
+
+후자는 여전히 팀마다 제각각이다. 공유 드라이브에 흩어진 Excel 파일, 버전 구분이 안 되는 파일명, 변경 이력을 알 수 없는 Word 문서.
+
+**spec-repo는 이 문서 산출물들을 코드처럼 관리하는 것을 목표로 한다.**
+
+별도의 `spec-repo`를 생성해 문서를 Git으로 추적하고, 개발 리포지토리에서 이 리포지토리를 에이전트 스킬로 연동하면 — 에이전트가 요구사항을 읽고, 설계서를 작성하고, 현황을 파악하는 데 필요한 컨텍스트를 항상 최신 상태로 유지할 수 있다.
+
+---
+
+## 왜 Agent Skills인가
+
+현재 이 도구는 **[Agent Skills](https://agentskills.io)** 오픈 표준을 기반으로 동작한다.
+
+Agent Skills는 Anthropic이 개발하고 공개한 에이전트 스킬 포맷으로, Claude Code, Cursor, GitHub Copilot, Gemini CLI, OpenAI Codex, Windsurf 등 20개 이상의 에이전트 도구가 지원하는 오픈 표준이다.
+
+이 표준을 선택한 이유는 단순하다:
+
+> 사용자가 이미 구독 중인 에이전트를 그대로 쓸 수 있어야 한다.
+
+특정 에이전트에 종속되지 않고, 팀원 각자가 선호하는 AI 도구에서 동일한 스킬 슬래시 커맨드(`/specrepo-requirements`, `/specrepo-review` 등)를 통해 문서를 관리한다.
+
+단, 이는 **현재 시점의 접근 방식**이다. AI 에이전트 생태계는 빠르게 진화하고 있으며, 더 나은 연동 방식이 안정화되면 변경될 수 있다.
+
+---
+
+## 동작 방식
+
+```
+spec-repo (문서 리포지토리)          개발 리포지토리
+├── references/                      ├── src/
+│   ├── requirements.json  ──────── ─┤  ...
+│   └── ...                          ├── .claude/skills/
+├── snapshots/                       │   └── specrepo-requirements/  ← 스킬 연동
+└── 00-rfp/                          └── AGENTS.md
+```
+
+1. `spec-repo create`로 문서 리포지토리 scaffold 생성 + 에이전트 스킬 자동 설치
+2. `spec-repo intake`로 RFP 등 입력 문서 등록
+3. 에이전트 스킬 커맨드로 문서를 관리
 
 ```bash
-npm install -g spec-repo
+/specrepo-requirements import 요구사항정의서_v0.7.8.xlsx   # Excel → JSON 임포트
+/specrepo-requirements export                              # JSON → Excel 재생성
+/specrepo-requirements status                              # 현황 확인
+/specrepo-review                                           # 문서 전반 검토
 ```
 
 ---
@@ -17,82 +62,61 @@ npm install -g spec-repo
 ## 빠른 시작
 
 ```bash
-# 1. 새 프로젝트 생성
-spec-repo create my-project
-cd my-project
+npm install -g spec-repo
 
-# 2. PROJECT.md 에 기술스택·컨벤션 채우기
+# 새 문서 리포지토리 생성
+spec-repo create my-project-spec
+cd my-project-spec
 
-# 3. RFP 수신
+# RFP 등록
 spec-repo intake ./견적요청서.pdf
 
-# 4. 출력된 지시문을 Claude Code 등 에이전트에 붙여넣기
-#    → 에이전트가 references/요구사항정의서.md 자동 작성
-
-# 5. 검토 후 버전 태깅
-./scripts/tag.sh review 요구사항정의서   # 검토 요청 + PDF 생성
-./scripts/tag.sh approved 요구사항정의서 # 고객 승인 완료 + PDF 생성
+# 에이전트로 요구사항 정의서 작성 시작
+# → 에이전트 스킬이 자동으로 설치되어 있음
 ```
 
 ---
 
-## 왜 필요한가
-
-AI 에이전트는 파일 구조와 규칙이 명확할수록 잘 작동합니다. 하지만 SI 프로젝트마다 문서 구조가 제각각이면 에이전트에게 매번 설명해야 합니다.
-
-spec-repo는 다음을 표준화합니다:
-
-- **어디에 뭐가 있는지** — `references/`, `templates/`, `snapshots/` 등 역할이 고정된 디렉토리
-- **에이전트가 어떻게 행동해야 하는지** — `AGENTS.md`, `SKILL.md` 에 규칙 내장
-- **문서 버전을 어떻게 관리하는지** — `tag.sh` 로 review/approved Git 태그 + PDF 스냅샷
-
----
-
-## 생성되는 프로젝트 구조
+## 생성되는 리포지토리 구조
 
 ```
-my-project/
-├── SKILL.md        에이전트 스킬 진입점
-├── AGENTS.md       에이전트 공통 행동 규칙
-├── CLAUDE.md       Claude 전용 규칙
-├── PROJECT.md      기술스택, 컨벤션, 외부연동 정보
+my-project-spec/
+├── SKILL.md              에이전트 스킬 진입점
+├── AGENTS.md             에이전트 공통 규칙
+├── PROJECT.md            프로젝트 기술스택·컨벤션
 │
-├── 00-rfp/         수신한 RFP 원본
-├── references/     요구사항정의서, DB설계서, API명세서 등 (마스터)
-├── templates/      각 문서의 초안 템플릿
-├── snapshots/      고객 납품용 PDF 스냅샷
+├── 00-rfp/               수신한 RFP 원본
+├── references/           산출물 원본 (진실의 원천, Git 추적)
+│   └── requirements.json 요구사항 JSON (Excel ↔ 동기화)
+├── snapshots/            납품용 스냅샷 (PDF, xlsx)
 └── scripts/
-    ├── tag.sh          버전 태깅 + PDF 생성
-    ├── export-pdf.sh   마크다운 → PDF 수동 변환
-    └── extract-pdf.sh  PDF → TXT 텍스트 추출
+    ├── tag.sh            버전 태깅 + PDF 생성
+    └── export-pdf.sh     마크다운 → PDF 변환
 ```
+
+`references/`가 **진실의 원천**이다. Excel 파일은 이 JSON을 내보낸 스냅샷이며, Git으로 추적되지 않는다.
 
 ---
 
-## 커맨드 레퍼런스
+## CLI 레퍼런스
 
 ### `spec-repo create [project-name]`
 
-새 spec-repo 프로젝트를 생성합니다.
+scaffold를 복사하고 에이전트 스킬을 자동 설치한다.
 
 ```bash
-spec-repo create my-project          # 새 디렉토리에 생성
-spec-repo create .                   # 현재 디렉토리에 생성
-spec-repo create my-project --no-git # git 초기화 생략
+spec-repo create my-project
+spec-repo create .            # 현재 디렉토리
+spec-repo create . --no-git  # git 초기화 생략
 ```
-
-| 옵션 | 설명 |
-|------|------|
-| `--no-git` | git 초기화 건너뜀 |
 
 ### `spec-repo intake <file>`
 
-RFP 또는 참고 문서를 프로젝트에 등록하고, 에이전트 분석 지시문을 출력합니다.
+RFP 또는 참고 문서를 등록하고 에이전트 분석 지시문을 출력한다.
 
 ```bash
 spec-repo intake ./rfp.pdf
 spec-repo intake ./보안요건.md --type supplement
-spec-repo intake ./rfp.pdf --dest 01-addendum
 ```
 
 | 옵션 | 설명 |
@@ -100,40 +124,13 @@ spec-repo intake ./rfp.pdf --dest 01-addendum
 | `--type rfp\|supplement` | 문서 유형 (기본: `rfp`) |
 | `--dest <dir>` | 저장 디렉토리 (기본: `00-rfp`) |
 
-지원 파일 형식: `.md`, `.pdf` (PDF는 텍스트 자동 추출)
-
----
-
-## 문서 버전 관리
-
-```bash
-# 고객에게 보내기 전 검토 요청
-./scripts/tag.sh review 요구사항정의서
-
-# 고객 승인 완료
-./scripts/tag.sh approved 요구사항정의서
-
-# 태그 목록 확인
-./scripts/tag.sh list
-```
-
-`review`와 `approved` 실행 시 `snapshots/` 에 PDF가 자동으로 생성됩니다.
-PDF 재생성이 필요하면:
-
-```bash
-./scripts/export-pdf.sh 요구사항정의서 approved
-./scripts/export-pdf.sh --all   # references/ 전체
-```
-
-> **사전 요건:** Node.js (npx). 첫 실행 시 Chromium을 자동 다운로드합니다 (~100MB, 1회).
-
 ---
 
 ## 요구 사항
 
 - Node.js 18 이상
-- Git (버전 태깅 사용 시)
-- npx (PDF 내보내기 사용 시)
+- Git
+- Python 3 + [uv](https://docs.astral.sh/uv/) (요구사항 스킬의 Excel 처리에 필요)
 
 ---
 
