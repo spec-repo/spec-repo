@@ -76,4 +76,6 @@ $ARGUMENTS 에 지정된 파일을 처리한다. 인자가 없으면 사용법�
 완료 후 다음을 사용자에게 보여준다:
 - 생성된 파일 목록 (`00-rfp/<파일명>/` 하위)
 - index.md 내용 미리보기
-- 다음 단계 안내: 요구사항정의서 작성이 필요하면 `/specrepo-review 요구사항정의서` 실행 안내
+- 다음 단계 안내:
+  - 요구사항이 아직 없으면: `/specrepo-requirements draft` — RFP 섹션을 분석해 요구사항 초안 자동 작성
+  - 기획팀이 만든 Excel이 있으면: `/specrepo-requirements import <파일경로>` — Excel → JSON 변환 후 관리 시작
