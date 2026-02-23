@@ -12,6 +12,9 @@ src/commands/create.js    spec-repo create 구현
 src/commands/intake.js    spec-repo intake 구현
 src/utils/scaffold.js     파일 복사 + 플레이스홀더 치환
 scaffold/                 한국어 스캐폴드 원본 (단일)
+scaffold/.claude/commands/  Claude 슬래시 커맨드 (intake, review)
+scaffold/.gemini/commands/  Gemini 슬래시 커맨드
+scaffold/.github/agents/    Copilot 에이전트 커맨드
 ```
 
 ## 커맨드 동작 요약
