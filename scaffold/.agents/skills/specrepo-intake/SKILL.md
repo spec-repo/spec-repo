@@ -1,6 +1,6 @@
 ---
 name: specrepo-intake
-description: RFP 또는 참고 문서를 등록하고 txt 추출 및 섹션 분리까지 수행합니다. 사용법: /spec-repo.intake <파일경로>
+description: RFP 또는 참고 문서를 등록하고 txt 추출 및 섹션 분리까지 수행합니다. 사용법: /specrepo-intake <파일경로>
 metadata:
   author: spec-repo
   version: "1.0"
@@ -8,8 +8,8 @@ metadata:
 
 $ARGUMENTS 에 지정된 파일을 처리한다. 인자가 없으면 사용법을 안내한다.
 
-**사용법**: `/spec-repo.intake <파일경로>`
-예) `/spec-repo.intake ./rfp.pdf`, `/spec-repo.intake 00-rfp/견적요청서.pdf`
+**사용법**: `/specrepo-intake <파일경로>`
+예) `/specrepo-intake ./rfp.pdf`, `/specrepo-intake 00-rfp/견적요청서.pdf`
 
 ---
 
@@ -76,4 +76,4 @@ $ARGUMENTS 에 지정된 파일을 처리한다. 인자가 없으면 사용법�
 완료 후 다음을 사용자에게 보여준다:
 - 생성된 파일 목록 (`00-rfp/<파일명>/` 하위)
 - index.md 내용 미리보기
-- 다음 단계 안내: 요구사항정의서 작성이 필요하면 추가 지시
+- 다음 단계 안내: 요구사항정의서 작성이 필요하면 `/specrepo-review 요구사항정의서` 실행 안내

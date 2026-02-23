@@ -1,0 +1,4 @@
+interface:
+  display_name: "Spec Repo Review"
+  short_description: "문서 검토 완료 또는 고객 승인 태그를 생성하고 PDF 스냅샷을 만듭니다."
+  default_prompt: "태그를 생성할 문서명을 알려주세요. 검토 요청이면 '문서명', 고객 승인이면 'approved 문서명' 형식으로 입력하세요."
