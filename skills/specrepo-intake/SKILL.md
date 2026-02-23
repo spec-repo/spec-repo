@@ -1,9 +1,6 @@
 ---
 name: specrepo-intake
 description: RFP 또는 참고 문서를 등록하고 txt 추출 및 섹션 분리까지 수행합니다. 사용법: /specrepo-intake <파일경로>
-metadata:
-  author: spec-repo
-  version: "1.0"
 ---
 
 $ARGUMENTS 에 지정된 파일을 처리한다. 인자가 없으면 사용법을 안내한다.
