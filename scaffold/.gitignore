@@ -1,0 +1,6 @@
+node_modules
+
+# 에이전트 스킬은 .agents/skills/ 가 원본.
+# .claude/skills/ 와 .agent/skills/ 는 spec-repo create 시 자동 생성됨.
+.claude/
+.agent/

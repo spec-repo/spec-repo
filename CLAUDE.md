@@ -12,8 +12,7 @@ src/commands/create.js    spec-repo create 구현
 src/commands/intake.js    spec-repo intake 구현
 src/utils/scaffold.js     파일 복사 + 플레이스홀더 치환
 scaffold/                       한국어 스캐폴드 원본 (단일)
-scaffold/.claude/skills/        Claude 에이전트 스킬 (specrepo-intake, specrepo-review)
-scaffold/.agents/skills/        범용 에이전트 스킬 (Gemini, Copilot 등)
+scaffold/.agents/skills/        에이전트 스킬 원본 (specrepo-intake, specrepo-review)
 ```
 
 ## 커맨드 동작 요약
@@ -21,6 +20,7 @@ scaffold/.agents/skills/        범용 에이전트 스킬 (Gemini, Copilot 등)
 **`create [name] [--no-git]`**
 - `scaffold/` → 대상 디렉토리 복사
 - `.md` 파일에서 `{{PROJECT_NAME}}`, `{{DATE}}` 치환
+- `.agents/skills/` → `.claude/skills/` + `.agent/skills/` 자동 복사 (에이전트별 경로 지원)
 - `scripts/*.sh` 실행 권한 부여 → `npm install` → 선택적 git init
 
 **`intake <file> [--type rfp|supplement] [--dest dir]`**
