@@ -45,6 +45,8 @@ convert_doc() {
 
   cat "$md_file" | npx --yes md-to-pdf \
     --pdf-options '{"format":"A4","margin":{"top":"2cm","right":"2.5cm","bottom":"2cm","left":"2.5cm"}}' \
+    --stylesheet "$SCRIPT_DIR/pdf-style.css" \
+    --launch-options '{"args":["--no-sandbox","--disable-setuid-sandbox"]}' \
     --basedir "$REFERENCES_DIR" \
     > "$pdf_file"
 

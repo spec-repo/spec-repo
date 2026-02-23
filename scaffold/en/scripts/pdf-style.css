@@ -1,31 +1,30 @@
 /* ──────────────────────────────────────────────
-   spec-repo PDF Style — 한글 폰트 + 기본 타이포그래피
+   spec-repo PDF Style — Base typography
    ────────────────────────────────────────────── */
 
-/* 1. 한글 웹폰트 (Noto Sans KR) — Chromium이 PDF 생성 시 로드 */
+/* 1. Web fonts */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
-/* 2. 기본 */
+/* 2. Base */
 body {
   font-family:
+    'Inter',
     'Noto Sans KR',
     'Apple SD Gothic Neo',
     'Malgun Gothic',
-    '맑은 고딕',
-    NanumGothic,
-    'Noto Sans CJK KR',
     sans-serif;
   font-size: 11pt;
   line-height: 1.7;
   color: #1a1a1a;
 }
 
-/* 3. 제목 */
+/* 3. Headings */
 h1 { font-size: 20pt; margin-bottom: 0.5em; }
 h2 { font-size: 15pt; margin-top: 1.5em; border-bottom: 1px solid #ccc; padding-bottom: 4px; }
 h3 { font-size: 12pt; margin-top: 1.2em; }
 
-/* 4. 표 */
+/* 4. Tables */
 table {
   border-collapse: collapse;
   width: 100%;
@@ -39,20 +38,20 @@ th, td {
 }
 th { background: #f0f0f0; font-weight: 700; }
 
-/* 5. 코드 */
+/* 5. Code */
 code {
-  font-family: 'D2Coding', 'Consolas', monospace;
+  font-family: 'Consolas', 'Courier New', monospace;
   font-size: 9.5pt;
   background: #f5f5f5;
   padding: 1px 4px;
   border-radius: 3px;
 }
 
-/* 6. 목록 */
+/* 6. Lists */
 ul, ol { padding-left: 1.5em; }
-li { margin-bottom: 4px; word-break: keep-all; }
+li { margin-bottom: 4px; }
 
-/* 7. 인용 */
+/* 7. Blockquote */
 blockquote {
   border-left: 4px solid #ddd;
   margin: 0;
@@ -60,7 +59,7 @@ blockquote {
   color: #555;
 }
 
-/* 8. 페이지 나누기 */
+/* 8. Page break */
 .page-break {
   page-break-after: always;
 }
