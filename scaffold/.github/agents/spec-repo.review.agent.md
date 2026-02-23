@@ -5,10 +5,10 @@ description: 문서 검토 완료 또는 고객 승인 태그를 생성하고 PD
 $ARGUMENTS 를 파싱하여 태그 상태와 문서명을 결정한다.
 
 **사용법**:
-- `/review <문서명>` → 검토 요청 태그 생성
-- `/review approved <문서명>` → 고객 승인 완료 태그 생성
+- `/spec-repo.review <문서명>` → 검토 요청 태그 생성
+- `/spec-repo.review approved <문서명>` → 고객 승인 완료 태그 생성
 
-예) `/review 요구사항정의서`, `/review approved 요구사항정의서`
+예) `/spec-repo.review 요구사항정의서`, `/spec-repo.review approved 요구사항정의서`
 
 ---
 
@@ -26,4 +26,4 @@ $ARGUMENTS 를 파싱하여 태그 상태와 문서명을 결정한다.
 3. 실행 결과를 보여준다
    - 생성된 Git 태그명
    - 생성된 PDF 경로 (`snapshots/` 하위)
-   - 다음 단계 안내 (`review` 완료 시 고객 검토 후 `/review approved <문서명>` 실행)
+   - 다음 단계 안내 (`review` 완료 시 고객 검토 후 `/spec-repo.review approved <문서명>` 실행)
