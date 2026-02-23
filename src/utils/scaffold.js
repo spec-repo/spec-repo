@@ -16,10 +16,8 @@ function copyDir(src, dest) {
   }
 }
 
-function scaffoldProject(targetDir, projectName, lang) {
-  const { detectLang } = require('./i18n');
-  const resolvedLang = lang || detectLang();
-  const scaffoldSrc = path.join(__dirname, '../../scaffold', resolvedLang);
+function scaffoldProject(targetDir, projectName) {
+  const scaffoldSrc = path.join(__dirname, '../../scaffold');
 
   // 디렉토리 구조 생성
   const dirs = [
