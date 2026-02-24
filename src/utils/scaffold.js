@@ -44,11 +44,12 @@ function scaffoldProject(targetDir, projectName) {
     fs.writeFileSync(filePath, content);
   }
 
-  // skills/ → .agents/skills/ + .claude/skills/ 복사
+  // skills/ → .agents/skills/ + .claude/skills/ + .agent/skills/ 복사
   const skillsSrc = path.join(__dirname, '../../skills');
   if (fs.existsSync(skillsSrc)) {
     copyDir(skillsSrc, path.join(targetDir, '.agents', 'skills'));
     copyDir(skillsSrc, path.join(targetDir, '.claude', 'skills'));
+    copyDir(skillsSrc, path.join(targetDir, '.agent', 'skills'));
   }
 
   // sp-common/scripts/ → {project}/scripts/ 배포
