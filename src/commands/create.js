@@ -30,8 +30,8 @@ const m = {
   snapshots/            ${dim('납품용 스냅샷 (gitignore)')}
 
   ${b('다음 단계')}
-  1  PROJECT.md 를 프로젝트 기준 정보로 채워주세요
-  2  RFP를 받으면  ${cyan('/specrepo-intake')} ${dim('<rfp파일>')}
+  1  사용 중인 에이전트에서 ${cyan('/specrepo-intake')} ${dim('<rfp파일>')} 을 실행하세요
+     RFP 파일 경로를 함께 전달하면 자동으로 등록하고 분석해드립니다
 `,
 };
 
