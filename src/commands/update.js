@@ -61,13 +61,17 @@ update
       }
     }
 
-    console.log(`\n✅ 스킬 업데이트 완료 (spec-repo v${version})`);
-    console.log(`   프로젝트: ${projectRoot}`);
-    console.log(`   업데이트된 스킬:`);
+    const b = (s) => `\x1b[1m${s}\x1b[0m`;
+    const dim = (s) => `\x1b[2m${s}\x1b[0m`;
+    const green = (s) => `\x1b[32m${s}\x1b[0m`;
+
+    console.log(`\n  ${green('✓')} ${b('스킬 업데이트 완료')}  ${dim(`spec-repo v${version}`)}\n`);
+    console.log(`  ${b('프로젝트')}  ${projectRoot}`);
+    console.log(`\n  ${b('업데이트된 스킬')}`);
     for (const name of skillNames) {
-      console.log(`     - ${name}`);
+      console.log(`  ├─ ${name}`);
     }
-    console.log('\n에이전트를 재시작하면 변경 사항이 반영됩니다.');
+    console.log(`\n  ${dim('에이전트를 재시작하면 변경 사항이 반영됩니다.')}\n`);
   });
 
 module.exports = update;

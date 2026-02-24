@@ -5,26 +5,33 @@ const path = require('path');
 const fs = require('fs');
 const { scaffoldProject } = require('../utils/scaffold');
 
+const b = (s) => `\x1b[1m${s}\x1b[0m`;
+const dim = (s) => `\x1b[2m${s}\x1b[0m`;
+const green = (s) => `\x1b[32m${s}\x1b[0m`;
+const cyan = (s) => `\x1b[36m${s}\x1b[0m`;
+
 const m = {
-  alreadyExists: (dir) => `오류: ${dir} 에 이미 spec-repo가 존재합니다.`,
-  creating: (name) => `\n📁 프로젝트 생성 중: ${name}`,
-  gitDone: '✅ git 저장소 초기화 완료',
-  gitFail: '⚠️  git 초기화 실패. 수동으로 진행해주세요.',
+  alreadyExists: (dir) => `\x1b[31merror\x1b[0m  ${dir} 에 이미 spec-repo가 존재합니다.`,
+  creating: (name) => `\n  ${dim('spec-repo')}  ${b(name)}\n`,
+  gitDone: `  ${green('✓')} git 초기화`,
+  gitFail: `  ${dim('!')} git 초기화 실패 (수동으로 진행해주세요)`,
   done: (name) => `
-✅ ${name} 생성 완료
+  ${green('✓')} ${b(name)} 생성 완료
 
-📂 구조:
-  SKILL.md          에이전트 스킬 진입점
-  PROJECT.md        프로젝트 기준 정보 (기술스택, 컨벤션)
-  00-rfp/           수신한 RFP 파일 보관
-  references/       산출물 문서 (마크다운)
-  templates/        문서 템플릿
-  scripts/          태깅, PDF 변환 등 자동화 스크립트
-  snapshots/        고객 납품용 PDF 스냅샷
+  ${b('구조')}
+  references/
+  ├─ 00-rfp/            ${dim('RFP 원본')}
+  ├─ 01-requirements/   ${dim('요구사항정의서')}
+  ├─ 02-design/         ${dim('설계 문서 (아키텍처, DB, API)')}
+  ├─ 03-test/           ${dim('테스트 시나리오')}
+  ├─ 04-ops/            ${dim('운영/배포 문서')}
+  └─ 05-mgmt/           ${dim('관리 문서')}
+  scripts/              ${dim('태깅, PDF 변환 자동화')}
+  snapshots/            ${dim('납품용 스냅샷 (gitignore)')}
 
-👉 다음 단계:
-  1. PROJECT.md 를 프로젝트에 맞게 채워주세요
-  2. RFP 파일을 받으면: /specrepo-intake <rfp파일> (에이전트 슬래시 커맨드)
+  ${b('다음 단계')}
+  1  PROJECT.md 를 프로젝트 기준 정보로 채워주세요
+  2  RFP를 받으면  ${cyan('/specrepo-intake')} ${dim('<rfp파일>')}
 `,
 };
 
