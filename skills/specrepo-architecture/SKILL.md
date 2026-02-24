@@ -18,6 +18,12 @@ $ARGUMENTS 에 지정된 서브커맨드를 실행한다. 인자가 없으면 �
 
 ## 파일 구조
 
+```
+skills/specrepo-architecture/
+└── data/
+    └── 아키텍처설계서-template.md    # 표준 템플릿 (draft 시 Read해서 구조 파악)
+```
+
 **프로젝트 내 파일 구조**:
 ```
 references/02-design/
@@ -61,7 +67,11 @@ RFP와 요구사항에서 다음 정보를 추출해 `아키텍처설계서.md`�
 - 어플리케이션 구성도 → `mermaid graph LR` (레이어 흐름)
 - 포트 번호 등 세부 정보 포함 시 → `images/` 폴더에 PNG로 따로 관리
 
-### 3단계: front matter 업데이트
+### 3단계: 템플릿 기반 작성
+
+`skills/specrepo-architecture/data/아키텍처설계서-template.md`를 Read해서 섹션 구조를 파악한 후, 프로젝트에 맞게 내용을 채워 `references/02-design/아키텍처설계서.md`를 생성한다.
+
+### 4단계: front matter 업데이트
 
 ```yaml
 status: draft

@@ -1,10 +1,6 @@
 ---
-name: {{PROJECT_NAME}}-spec
-description: >
-  {{PROJECT_NAME}} 프로젝트 요구사항·설계 산출물.
-  기능 구현, API 개발, DB 설계, 테스트 시나리오 작성 시 반드시 참조.
-  문서 변경이 필요한 경우 scripts/tag.sh 로 버전 관리.
-allowed-tools: Read Bash
+name: "{{PROJECT_NAME}}-spec"
+description: "{{PROJECT_NAME}} 프로젝트 요구사항·설계 산출물. 기능 구현, API 개발, DB 설계, 테스트 시나리오 작성 시 반드시 참조. 문서 변경이 필요한 경우 scripts/tag.sh 로 버전 관리."
 ---
 
 # {{PROJECT_NAME}} 프로젝트 스펙
@@ -36,6 +32,8 @@ allowed-tools: Read Bash
 |------|------|---------|
 | 요구사항정의서 | `/specrepo-requirements` | MD + JSON (Excel 입출력) |
 | 아키텍처설계서 | `/specrepo-architecture` | MD (PDF/docx 내보내기) |
+| API명세서 | `/specrepo-api` | MD (OpenAPI sync, PDF/docx 내보내기) |
+| DB설계서 | `/specrepo-db` | MD (DDL 생성, PDF/docx 내보내기) |
 
 > 스킬 없이 직접 편집도 가능. 스킬은 draft 초안 생성, import/export 자동화, 버전 태깅을 지원한다.
 
