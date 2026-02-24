@@ -28,6 +28,17 @@ allowed-tools: Read Bash
 - `코드 = ✗` 문서는 프로세스·관리 질문에만 참조한다
 - 문서 수정 후 사람에게 확인을 받고 `scripts/tag.sh` 를 실행한다
 
+## 문서 관리 스킬
+
+각 문서 유형별로 전용 스킬이 제공된다:
+
+| 문서 | 스킬 | 관리 방식 |
+|------|------|---------|
+| 요구사항정의서 | `/specrepo-requirements` | MD + JSON (Excel 입출력) |
+| 아키텍처설계서 | `/specrepo-architecture` | MD (PDF/docx 내보내기) |
+
+> 스킬 없이 직접 편집도 가능. 스킬은 draft 초안 생성, import/export 자동화, 버전 태깅을 지원한다.
+
 ## 버전 관리 규칙
 
 ```bash
