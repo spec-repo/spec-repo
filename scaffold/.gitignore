@@ -3,6 +3,7 @@ node_modules
 # 에이전트 툴 디렉토리 — spec-repo create/update 로 관리됨 (커밋 불필요)
 .claude/
 .agents/
+.agent/
 
 # 생성된 결과물 스냅샷 — 재생성 가능하므로 커밋 불필요
 snapshots/

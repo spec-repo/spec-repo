@@ -23,6 +23,7 @@ function scaffoldProject(targetDir, projectName) {
   const dirs = [
     'snapshots',
     'tmp',
+    '.agent',
   ];
   for (const dir of dirs) {
     fs.mkdirSync(path.join(targetDir, dir), { recursive: true });
