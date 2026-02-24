@@ -110,19 +110,16 @@ spec-repo create .            # 현재 디렉토리
 spec-repo create . --no-git  # git 초기화 생략
 ```
 
-### `spec-repo intake <file>`
+### `spec-repo update`
 
-RFP 또는 참고 문서를 등록하고 에이전트 분석 지시문을 출력한다.
+spec-repo 패키지가 업데이트된 후, 이미 생성된 프로젝트의 스킬을 최신 버전으로 교체한다.
 
 ```bash
-spec-repo intake ./rfp.pdf
-spec-repo intake ./보안요건.md --type supplement
+# spec-repo 프로젝트 디렉토리 안에서 실행
+spec-repo update
 ```
 
-| 옵션 | 설명 |
-|------|------|
-| `--type rfp\|supplement` | 문서 유형 (기본: `rfp`) |
-| `--dest <dir>` | 저장 디렉토리 (기본: `00-rfp`) |
+`.agents/skills/`와 `.claude/skills/` 안의 스킬 파일만 덮어쓴다. 프로젝트의 다른 파일(AGENTS.md, references/ 등)은 건드리지 않는다.
 
 ---
 

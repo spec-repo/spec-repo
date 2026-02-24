@@ -24,7 +24,7 @@ const m = {
 
 👉 다음 단계:
   1. PROJECT.md 를 프로젝트에 맞게 채워주세요
-  2. RFP 파일을 받으면: spec-repo intake <rfp파일>
+  2. RFP 파일을 받으면: /specrepo-intake <rfp파일> (에이전트 슬래시 커맨드)
 `,
 };
 

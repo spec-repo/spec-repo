@@ -64,4 +64,4 @@ function scaffoldProject(targetDir, projectName) {
   }
 }
 
-module.exports = { scaffoldProject };
+module.exports = { scaffoldProject, copyDir };

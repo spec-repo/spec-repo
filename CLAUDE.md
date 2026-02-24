@@ -9,10 +9,10 @@ SI 프로젝트 산출물을 AI 에이전트가 활용하기 좋은 구조로 �
 ```
 bin/spec-repo.js          진입점 (commander)
 src/commands/create.js    spec-repo create 구현
-src/commands/intake.js    spec-repo intake 구현
+src/commands/update.js    spec-repo update 구현
 src/utils/scaffold.js     파일 복사 + 플레이스홀더 치환
-scaffold/                       한국어 스캐폴드 원본 (단일)
-scaffold/.agents/skills/        에이전트 스킬 원본 (specrepo-intake, specrepo-review)
+scaffold/                 한국어 스캐폴드 원본
+skills/                   에이전트 스킬 원본 (specrepo-intake, specrepo-review, specrepo-requirements)
 ```
 
 ## 커맨드 동작 요약
@@ -20,14 +20,12 @@ scaffold/.agents/skills/        에이전트 스킬 원본 (specrepo-intake, spe
 **`create [name] [--no-git]`**
 - `scaffold/` → 대상 디렉토리 복사
 - `.md` 파일에서 `{{PROJECT_NAME}}`, `{{DATE}}` 치환
-- `.agents/skills/` → `.claude/skills/` + `.agent/skills/` 자동 복사 (에이전트별 경로 지원)
+- `skills/` → `.agents/skills/` + `.claude/skills/` 자동 복사
 - `scripts/*.sh` 실행 권한 부여 → `npm install` → 선택적 git init
 
-**`intake <file> [--type rfp|supplement] [--dest dir]`**
-- 상위 디렉토리로 올라가며 `SKILL.md` 탐색 → 프로젝트 루트 결정
-- 파일을 `--dest`(기본 `00-rfp/`)에 복사
-- PDF면 `pdf-parse` 로 `.txt` 추출 시도
-- 에이전트 분석 지시문 stdout 출력
+**`update`**
+- 현재 디렉토리에서 spec-repo 프로젝트 루트 탐색 (`.agents/skills/`, `.claude/skills/`, `SKILL.md` 기준)
+- `skills/` (패키지 최신) → 프로젝트의 `.agents/skills/` + `.claude/skills/` 덮어쓰기
 
 ## 스캐폴드 수정 시 주의
 
@@ -39,5 +37,4 @@ scaffold/.agents/skills/        에이전트 스킬 원본 (specrepo-intake, spe
 | 패키지 | 용도 |
 |--------|------|
 | `commander` | CLI 파싱 |
-| `pdf-parse` | intake PDF → TXT 추출 |
 | `md-to-pdf` (npx 런타임) | `scripts/export-pdf.sh` 내부 사용 |

@@ -11,6 +11,6 @@ program
   .version(version);
 
 program.addCommand(require('../src/commands/create'));
-program.addCommand(require('../src/commands/intake'));
+program.addCommand(require('../src/commands/update'));
 
 program.parse();
