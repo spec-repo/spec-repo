@@ -148,35 +148,30 @@ git commit -m "feat: 시스템아키텍처정의서 임포트 v{version} ({sourc
 
 ### PDF 내보내기
 
-```bash
-# md-to-pdf (scaffold 기본 제공)
-./scripts/export-pdf.sh 02-design/아키텍처설계서
+Mermaid 다이어그램을 PNG로 자동 변환 후 PDF를 생성한다.
 
-# 직접 호출
-npx md-to-pdf references/02-design/아키텍처설계서.md \
-  --dest snapshots/architecture/
+```bash
+./scripts/export-pdf.sh 아키텍처설계서
+./scripts/export-pdf.sh 아키텍처설계서 review    # 태그 연동 시
 ```
 
 ### Word(.docx) 내보내기
 
-pandoc이 설치된 경우:
+Mermaid 다이어그램을 PNG로 자동 변환 후 docx를 생성한다.
 
 ```bash
 # 기본 변환
-pandoc references/02-design/아키텍처설계서.md \
-  -o snapshots/architecture/아키텍처설계서_v{version}.docx
+./scripts/export-docx.sh 아키텍처설계서
 
-# 커스텀 Word 템플릿 적용 (결재란/로고 포함 공문서 양식)
-pandoc references/02-design/아키텍처설계서.md \
-  --reference-doc=references/02-design/_template.docx \
-  -o snapshots/architecture/아키텍처설계서_v{version}.docx
+# 버전 명시
+./scripts/export-docx.sh 아키텍처설계서 1.0.0
 ```
 
-**커스텀 Word 템플릿**: `references/02-design/_template.docx` 파일이 있으면 자동으로 해당 템플릿의 스타일을 적용한다. 없으면 pandoc 기본 스타일로 생성.
+`references/02-design/_template.docx`가 있으면 자동으로 커스텀 Word 템플릿(결재란·로고 등)을 적용한다.
 
-> pandoc 설치: `apt install pandoc` (Ubuntu/WSL)
+> 사전 요건: `sudo apt install pandoc`  (Ubuntu/WSL)
 
-출력 파일 기본 경로: `snapshots/architecture/아키텍처설계서_v{version}_{YYYYMMDD}.{ext}`
+출력 파일 기본 경로: `snapshots/02-design/아키텍처설계서[_v{version}]_{YYYYMMDD}.{ext}`
 
 ---
 

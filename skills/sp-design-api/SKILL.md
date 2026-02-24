@@ -150,21 +150,20 @@ for path, methods in spec.get('paths', {}).items():
 
 ## export: MD → 산출물 파일 생성
 
+Mermaid 다이어그램을 PNG로 자동 변환 후 출력한다.
+
 ```bash
 # PDF
-npx md-to-pdf references/02-design/API명세서.md --dest snapshots/api/
+./scripts/export-pdf.sh API명세서
 
-# docx (pandoc)
-pandoc references/02-design/API명세서.md \
-  -o snapshots/api/API명세서_v{version}.docx
-
-# 커스텀 Word 템플릿 적용
-pandoc references/02-design/API명세서.md \
-  --reference-doc=references/02-design/_template.docx \
-  -o snapshots/api/API명세서_v{version}.docx
+# Word(.docx)
+./scripts/export-docx.sh API명세서
+./scripts/export-docx.sh API명세서 1.0.0   # 버전 명시
 ```
 
-출력 경로: `snapshots/api/API명세서_v{version}_{YYYYMMDD}.{ext}`
+`references/02-design/_template.docx`가 있으면 자동으로 커스텀 Word 템플릿을 적용한다.
+
+출력 경로: `snapshots/02-design/API명세서[_v{version}]_{YYYYMMDD}.{ext}`
 
 ---
 

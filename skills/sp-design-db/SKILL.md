@@ -136,21 +136,20 @@ git commit -m "feat: DB설계서 임포트 v{version} ({source})"
 
 ## export: MD → 산출물 파일 생성
 
+Mermaid ERD를 PNG로 자동 변환 후 출력한다.
+
 ```bash
 # PDF
-npx md-to-pdf references/02-design/DB설계서.md --dest snapshots/db/
+./scripts/export-pdf.sh DB설계서
 
-# docx (pandoc)
-pandoc references/02-design/DB설계서.md \
-  -o snapshots/db/DB설계서_v{version}.docx
-
-# 커스텀 Word 템플릿 적용
-pandoc references/02-design/DB설계서.md \
-  --reference-doc=references/02-design/_template.docx \
-  -o snapshots/db/DB설계서_v{version}.docx
+# Word(.docx)
+./scripts/export-docx.sh DB설계서
+./scripts/export-docx.sh DB설계서 1.0.0   # 버전 명시
 ```
 
-출력 경로: `snapshots/db/DB설계서_v{version}_{YYYYMMDD}.{ext}`
+`references/02-design/_template.docx`가 있으면 자동으로 커스텀 Word 템플릿을 적용한다.
+
+출력 경로: `snapshots/02-design/DB설계서[_v{version}]_{YYYYMMDD}.{ext}`
 
 ---
 

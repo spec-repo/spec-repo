@@ -65,7 +65,17 @@ convert_doc() {
 
   echo "변환 중: ${doc_name}.md → snapshots/$(basename "$pdf_file")"
 
-  cat "$md_file" | npx --yes md-to-pdf \
+  # Mermaid 코드블록 → PNG 전처리
+  local src_md="$md_file"
+  if command -v python3 &>/dev/null && [ -f "$SCRIPT_DIR/preprocess-mermaid.py" ]; then
+    local preprocessed
+    preprocessed=$(python3 "$SCRIPT_DIR/preprocess-mermaid.py" --input "$md_file" 2>/dev/null)
+    if [ -n "$preprocessed" ] && [ -f "$preprocessed" ]; then
+      src_md="$preprocessed"
+    fi
+  fi
+
+  cat "$src_md" | npx --yes md-to-pdf \
     --pdf-options '{"format":"A4","margin":{"top":"2cm","right":"2.5cm","bottom":"2cm","left":"2.5cm"}}' \
     --stylesheet "$SCRIPT_DIR/pdf-style.css" \
     --launch-options '{"args":["--no-sandbox","--disable-setuid-sandbox"]}' \
