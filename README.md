@@ -29,7 +29,7 @@ Agent Skills는 Anthropic이 개발하고 공개한 에이전트 스킬 포맷�
 
 > 사용자가 이미 구독 중인 에이전트를 그대로 쓸 수 있어야 한다.
 
-특정 에이전트에 종속되지 않고, 팀원 각자가 선호하는 AI 도구에서 동일한 스킬 슬래시 커맨드(`/spec-req`, `)를 통해 문서를 관리한다.
+특정 에이전트에 종속되지 않고, 팀원 각자가 선호하는 AI 도구에서 동일한 스킬 슬래시 커맨드(`/sp-req`, `)를 통해 문서를 관리한다.
 
 단, 이는 **현재 시점의 접근 방식**이다. AI 에이전트 생태계는 빠르게 진화하고 있으며, 더 나은 연동 방식이 안정화되면 변경될 수 있다.
 
@@ -42,7 +42,7 @@ spec-repo (문서 리포지토리)          개발 리포지토리
 ├── references/                      ├── src/
 │   ├── requirements.json  ──────── ─┤  ...
 │   └── ...                          ├── .claude/skills/
-├── snapshots/                       │   └── spec-req/  ← 스킬 연동
+├── snapshots/                       │   └── sp-req/  ← 스킬 연동
 └── 00-rfp/                          └── AGENTS.md
 ```
 
@@ -51,9 +51,9 @@ spec-repo (문서 리포지토리)          개발 리포지토리
 3. 에이전트 스킬 커맨드로 문서를 관리
 
 ```bash
-/spec-req import 요구사항정의서_v0.7.8.xlsx   # Excel → JSON 임포트
-/spec-req export                              # JSON → Excel 재생성
-/spec-req status                              # 현황 확인
+/sp-req import 요구사항정의서_v0.7.8.xlsx   # Excel → JSON 임포트
+/sp-req export                              # JSON → Excel 재생성
+/sp-req status                              # 현황 확인
 
 ```
 

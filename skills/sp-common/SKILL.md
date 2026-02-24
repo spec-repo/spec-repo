@@ -1,5 +1,5 @@
 ---
-name: spec-common
+name: sp-common
 description: "spec-repo 공통 유틸리티 스킬. tag.sh(문서 버전 태깅), export-pdf.sh(MD→PDF 변환), extract-pdf.sh(PDF 텍스트 추출) 스크립트를 제공하며, 다른 spec-* 스킬이 내부적으로 활용한다."
 ---
 

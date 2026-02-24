@@ -1,5 +1,5 @@
 ---
-name: spec-design-db
+name: sp-design-db
 description: "DB설계서 관리. 요구사항·아키텍처 기반 초안 도출(draft), 기존 문서 임포트(import), PDF/docx 내보내기(export), DDL 생성(ddl), 현황 확인(status)을 지원한다."
 metadata:
   author: spec-repo
@@ -9,18 +9,18 @@ metadata:
 $ARGUMENTS 에 지정된 서브커맨드를 실행한다. 인자가 없으면 사용법을 안내한다.
 
 **사용법**:
-- `/spec-design-db draft` — 요구사항 + 아키텍처 → DB설계서.md 초안 생성
-- `/spec-design-db import <file>` — 기존 PDF/docx → MD 구조화
-- `/spec-design-db export [--format pdf|docx]` — MD → 산출물 파일 생성
-- `/spec-design-db ddl [--dialect mysql|oracle|postgresql]` — MD → DDL 생성
-- `/spec-design-db status` — 현황 확인
+- `/sp-design-db draft` — 요구사항 + 아키텍처 → DB설계서.md 초안 생성
+- `/sp-design-db import <file>` — 기존 PDF/docx → MD 구조화
+- `/sp-design-db export [--format pdf|docx]` — MD → 산출물 파일 생성
+- `/sp-design-db ddl [--dialect mysql|oracle|postgresql]` — MD → DDL 생성
+- `/sp-design-db status` — 현황 확인
 
 ---
 
 ## 파일 구조
 
 ```
-skills/spec-design-db/
+skills/sp-design-db/
 └── data/
     └── DB설계서-template.md    # 표준 템플릿 (에이전트 참조용)
 ```
@@ -69,7 +69,7 @@ snapshots/db/      ← 내보낸 산출물 (.gitignore 권장)
 
 ### 3단계: 템플릿 기반 작성
 
-`skills/spec-design-db/data/DB설계서-template.md`를 Read해서 구조를 파악한 후, 프로젝트에 맞게 내용을 채워 `references/02-design/DB설계서.md`를 생성한다.
+`skills/sp-design-db/data/DB설계서-template.md`를 Read해서 구조를 파악한 후, 프로젝트에 맞게 내용을 채워 `references/02-design/DB설계서.md`를 생성한다.
 
 ### 4단계: front matter 업데이트
 
@@ -164,7 +164,7 @@ pandoc references/02-design/DB설계서.md \
 
 ```bash
 # DDL 생성 (oracle 기본)
-uv run python3 skills/spec-design-db/scripts/md-to-ddl.py \
+uv run python3 skills/sp-design-db/scripts/md-to-ddl.py \
   references/02-design/DB설계서.md \
   --dialect oracle \
   --out snapshots/db/ddl_v{version}.sql

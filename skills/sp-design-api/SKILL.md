@@ -1,5 +1,5 @@
 ---
-name: spec-design-api
+name: sp-design-api
 description: "API명세서 관리. RFP·요구사항·아키텍처 기반 초안 도출(draft), 기존 문서 임포트(import), Swagger/OpenAPI 연동(sync), PDF/docx 내보내기(export), 현황 확인(status)을 지원한다."
 metadata:
   author: spec-repo
@@ -9,18 +9,18 @@ metadata:
 $ARGUMENTS 에 지정된 서브커맨드를 실행한다. 인자가 없으면 사용법을 안내한다.
 
 **사용법**:
-- `/spec-design-api draft` — 요구사항 + 아키텍처 → API명세서.md 초안 생성
-- `/spec-design-api import <file>` — 기존 PDF/docx/yaml → MD 구조화
-- `/spec-design-api sync <openapi-file>` — OpenAPI(Swagger) YAML/JSON → MD 갱신
-- `/spec-design-api export [--format pdf|docx]` — MD → 산출물 파일 생성
-- `/spec-design-api status` — 현황 확인
+- `/sp-design-api draft` — 요구사항 + 아키텍처 → API명세서.md 초안 생성
+- `/sp-design-api import <file>` — 기존 PDF/docx/yaml → MD 구조화
+- `/sp-design-api sync <openapi-file>` — OpenAPI(Swagger) YAML/JSON → MD 갱신
+- `/sp-design-api export [--format pdf|docx]` — MD → 산출물 파일 생성
+- `/sp-design-api status` — 현황 확인
 
 ---
 
 ## 파일 구조
 
 ```
-skills/spec-design-api/
+skills/sp-design-api/
 └── data/
     └── API명세서-template.md    # 표준 템플릿 (에이전트 참조용)
 ```
@@ -64,7 +64,7 @@ snapshots/api/      ← 내보낸 산출물 (.gitignore 권장)
 
 ### 3단계: 템플릿 기반 작성
 
-`skills/spec-design-api/data/API명세서-template.md`를 Read해서 구조를 파악한 후, 프로젝트에 맞게 내용을 채워 `references/02-design/API명세서.md`를 생성한다.
+`skills/sp-design-api/data/API명세서-template.md`를 Read해서 구조를 파악한 후, 프로젝트에 맞게 내용을 채워 `references/02-design/API명세서.md`를 생성한다.
 
 ### 4단계: front matter 업데이트
 

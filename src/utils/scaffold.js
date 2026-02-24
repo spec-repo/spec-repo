@@ -53,8 +53,8 @@ function scaffoldProject(targetDir, projectName) {
     copyDir(skillsSrc, path.join(targetDir, '.claude', 'skills'));
   }
 
-  // spec-common/scripts/ → {project}/scripts/ 배포
-  const commonScriptsSrc = path.join(__dirname, '../../skills/spec-common/scripts');
+  // sp-common/scripts/ → {project}/scripts/ 배포
+  const commonScriptsSrc = path.join(__dirname, '../../skills/sp-common/scripts');
   if (fs.existsSync(commonScriptsSrc)) {
     copyDir(commonScriptsSrc, path.join(targetDir, 'scripts'));
   }
