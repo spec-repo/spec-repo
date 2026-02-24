@@ -1,5 +1,5 @@
 ---
-name: "{{PROJECT_NAME}}-spec"
+name: "{{PROJECT_NAME}}"
 description: "{{PROJECT_NAME}} 프로젝트 요구사항·설계 산출물. 기능 구현, API 개발, DB 설계, 테스트 시나리오 작성 시 반드시 참조. 문서 변경이 필요한 경우 scripts/tag.sh 로 버전 관리."
 ---
 
