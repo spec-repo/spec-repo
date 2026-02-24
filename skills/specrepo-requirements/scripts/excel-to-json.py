@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-요구사항정의서 xlsx → references/requirements.json 변환 스크립트.
+요구사항정의서 xlsx → 01-requirements/requirements.json 변환 스크립트.
 
 Usage:
     uv run --with openpyxl python3 excel-to-json.py <excel-file>
@@ -276,7 +276,7 @@ def main():
 
     if out_path is None:
         project_root = find_project_root(filepath.parent)
-        out_path = project_root / "references" / "requirements.json"
+        out_path = project_root / "01-requirements" / "requirements.json"
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
 

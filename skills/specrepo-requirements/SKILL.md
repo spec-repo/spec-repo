@@ -26,14 +26,14 @@ skills/specrepo-requirements/
     ├── sheet_styles.py               # Excel 스타일 공통 모듈
     ├── create-template.py            # 템플릿 xlsx 재생성
     ├── parse-excel.py                # xlsx 파싱 → JSON/요약 (분석용)
-    ├── excel-to-json.py              # xlsx → references/requirements.json
+    ├── excel-to-json.py              # xlsx → 01-requirements/requirements.json
     ├── json-to-excel.py              # requirements.json → xlsx
-    └── json-to-md.py                 # requirements.json → references/requirements.md
+    └── json-to-md.py                 # requirements.json → 01-requirements/requirements.md
 ```
 
 **프로젝트 내 파일 구조**:
 ```
-references/
+references/01-requirements/
 ├── requirements.json    ← 진실의 원천 (git 추적, 직접 편집 금지)
 └── requirements.md      ← JSON에서 자동 생성 (git 추적, 직접 편집 금지)
 snapshots/requirements/  ← xlsx 스냅샷 (.gitignore 권장)
@@ -87,7 +87,7 @@ python3 skills/specrepo-requirements/scripts/json-to-md.py
 ### 4단계: git commit
 
 ```bash
-git add references/requirements.json references/requirements.md
+git add 01-requirements/requirements.json 01-requirements/requirements.md
 git commit -m "feat: 요구사항 초안 도출 (기능 N개, 비기능 M개)"
 ```
 
@@ -125,7 +125,7 @@ python3 skills/specrepo-requirements/scripts/json-to-md.py
 ### git commit
 
 ```bash
-git add references/requirements.json references/requirements.md
+git add 01-requirements/requirements.json 01-requirements/requirements.md
 git commit -m "feat: 요구사항 임포트 v{version} ({source})"
 ```
 
@@ -144,7 +144,7 @@ uv run --with openpyxl python3 skills/specrepo-requirements/scripts/json-to-exce
 
 # 경로 직접 지정
 uv run --with openpyxl python3 skills/specrepo-requirements/scripts/json-to-excel.py \
-  --input references/requirements.json \
+  --input 01-requirements/requirements.json \
   --out snapshots/requirements/export.xlsx
 ```
 
@@ -164,7 +164,7 @@ python3 skills/specrepo-requirements/scripts/json-to-md.py
 
 ## status: 현황 확인
 
-`references/requirements.json`을 Read해서 다음을 보고한다:
+`01-requirements/requirements.json`을 Read해서 다음을 보고한다:
 
 - 버전 (`_meta.version`)
 - 기능/비기능 요구사항 수

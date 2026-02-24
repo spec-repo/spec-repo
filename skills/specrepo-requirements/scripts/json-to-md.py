@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """
-requirements.json → references/requirements.md 생성 스크립트.
+requirements.json → 01-requirements/requirements.md 생성 스크립트.
 import/draft 명령 후 자동으로 호출된다.
 
 Usage:
     python3 json-to-md.py
-    python3 json-to-md.py --input references/requirements.json
-    python3 json-to-md.py --out references/requirements.md
+    python3 json-to-md.py --input 01-requirements/requirements.json
+    python3 json-to-md.py --out 01-requirements/requirements.md
 """
 
 import sys
@@ -15,19 +15,19 @@ from pathlib import Path
 
 
 def find_json_path(start_dir):
-    """references/requirements.json 탐색."""
+    """01-requirements/requirements.json 탐색."""
     current = Path(start_dir).resolve()
     for _ in range(10):
-        candidate = current / "references" / "requirements.json"
+        candidate = current / "01-requirements" / "requirements.json"
         if candidate.exists():
             return candidate
         if (current / "AGENTS.md").exists() or (current / ".git").is_dir():
-            return current / "references" / "requirements.json"
+            return current / "01-requirements" / "requirements.json"
         parent = current.parent
         if parent == current:
             break
         current = parent
-    return Path(start_dir).resolve() / "references" / "requirements.json"
+    return Path(start_dir).resolve() / "01-requirements" / "requirements.json"
 
 
 def _trunc(text, n=50):
@@ -180,7 +180,7 @@ def main():
         f" | **마지막 갱신**: {last_upd}"
     )
     lines.append("")
-    lines.append("> ⚠️ 이 파일은 `references/requirements.json`에서 자동 생성됩니다. 직접 편집하지 마세요.")
+    lines.append("> ⚠️ 이 파일은 `01-requirements/requirements.json`에서 자동 생성됩니다. 직접 편집하지 마세요.")
     lines.append("")
     lines.append("---")
     lines.append("")

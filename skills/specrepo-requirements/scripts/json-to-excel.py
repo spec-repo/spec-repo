@@ -4,7 +4,7 @@ requirements.json → xlsx 재생성 스크립트.
 
 Usage:
     uv run --with openpyxl python3 json-to-excel.py
-    uv run --with openpyxl python3 json-to-excel.py --input references/requirements.json
+    uv run --with openpyxl python3 json-to-excel.py --input 01-requirements/requirements.json
     uv run --with openpyxl python3 json-to-excel.py --out snapshots/requirements/export.xlsx
     uv run --with openpyxl python3 json-to-excel.py --version 1.2.3
 """
@@ -160,19 +160,19 @@ def write_data_rows(ws, items, parent_col_map, sub_col_map):
 
 
 def find_json_path(start_dir):
-    """references/requirements.json 탐색."""
+    """01-requirements/requirements.json 탐색."""
     current = Path(start_dir).resolve()
     for _ in range(10):
-        candidate = current / "references" / "requirements.json"
+        candidate = current / "01-requirements" / "requirements.json"
         if candidate.exists():
             return candidate
         if (current / "AGENTS.md").exists() or (current / ".git").is_dir():
-            return current / "references" / "requirements.json"
+            return current / "01-requirements" / "requirements.json"
         parent = current.parent
         if parent == current:
             break
         current = parent
-    return Path(start_dir).resolve() / "references" / "requirements.json"
+    return Path(start_dir).resolve() / "01-requirements" / "requirements.json"
 
 
 def main():

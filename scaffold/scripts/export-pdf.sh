@@ -9,17 +9,25 @@
 #   ./scripts/export-pdf.sh --all
 #
 # 예시:
-#   ./scripts/export-pdf.sh 요구사항정의서 review
-#   ./scripts/export-pdf.sh 요구사항정의서 approved
+#   ./scripts/export-pdf.sh 아키텍처설계서 review
+#   ./scripts/export-pdf.sh 테스트시나리오 approved
 #   ./scripts/export-pdf.sh --all
 
 set -e
 
 SCRIPT_DIR="$(CDPATH="" cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
-REFERENCES_DIR="$REPO_ROOT/references"
 SNAPSHOTS_DIR="$REPO_ROOT/snapshots"
 TODAY=$(date +%Y-%m-%d)
+
+# 스테이지 폴더 목록 (문서 탐색 순서)
+STAGE_DIRS=(
+  "references/01-requirements"
+  "references/02-design"
+  "references/03-test"
+  "references/04-ops"
+  "references/05-mgmt"
+)
 
 mkdir -p "$SNAPSHOTS_DIR"
 
@@ -29,17 +37,31 @@ if ! command -v npx &>/dev/null; then
   exit 1
 fi
 
+# 문서명으로 md 파일 경로 탐색
+find_doc() {
+  local doc_name="$1"
+  for stage_dir in "${STAGE_DIRS[@]}"; do
+    local candidate="$REPO_ROOT/$stage_dir/${doc_name}.md"
+    if [ -f "$candidate" ]; then
+      echo "$candidate"
+      return 0
+    fi
+  done
+  return 1
+}
+
 convert_doc() {
   local doc_name="$1"
   local status="${2:-}"
-  local md_file="$REFERENCES_DIR/${doc_name}.md"
+  local md_file
+  md_file="$(find_doc "$doc_name")" || {
+    echo "오류: ${doc_name}.md 파일을 찾을 수 없습니다. (탐색 범위: ${STAGE_DIRS[*]})"
+    return 1
+  }
+  local doc_dir
+  doc_dir="$(dirname "$md_file")"
   local suffix="${status:+.${status}}"
   local pdf_file="$SNAPSHOTS_DIR/${doc_name}_${TODAY}${suffix}.pdf"
-
-  if [ ! -f "$md_file" ]; then
-    echo "오류: ${md_file} 파일을 찾을 수 없습니다."
-    return 1
-  fi
 
   echo "변환 중: ${doc_name}.md → snapshots/$(basename "$pdf_file")"
 
@@ -47,17 +69,21 @@ convert_doc() {
     --pdf-options '{"format":"A4","margin":{"top":"2cm","right":"2.5cm","bottom":"2cm","left":"2.5cm"}}' \
     --stylesheet "$SCRIPT_DIR/pdf-style.css" \
     --launch-options '{"args":["--no-sandbox","--disable-setuid-sandbox"]}' \
-    --basedir "$REFERENCES_DIR" \
+    --basedir "$doc_dir" \
     > "$pdf_file"
 
   echo "✅ 저장됨: $pdf_file"
 }
 
 if [ "${1:-}" = "--all" ]; then
-  for md_file in "$REFERENCES_DIR"/*.md; do
-    [ -f "$md_file" ] || continue
-    doc_name="$(basename "$md_file" .md)"
-    convert_doc "$doc_name"
+  for stage_dir in "${STAGE_DIRS[@]}"; do
+    stage_path="$REPO_ROOT/$stage_dir"
+    [ -d "$stage_path" ] || continue
+    for md_file in "$stage_path"/*.md; do
+      [ -f "$md_file" ] || continue
+      doc_name="$(basename "$md_file" .md)"
+      convert_doc "$doc_name"
+    done
   done
 else
   [ -z "${1:-}" ] && { echo "사용법: $0 <문서명> [상태] 또는 $0 --all"; exit 1; }
