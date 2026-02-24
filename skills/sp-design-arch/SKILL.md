@@ -44,9 +44,10 @@ snapshots/architecture/  ← 내보낸 산출물 (.gitignore 권장)
 ### 1단계: 입력 문서 파악
 
 아래 순서로 파일을 탐색한다:
-1. `references/00-rfp/*/index.md` — RFP 구조화 인덱스
-2. `references/00-rfp/*/section-*.md` — RFP 섹션 원문
-3. `references/01-requirements/requirements.md` — 요구사항정의서 (있으면 참조)
+1. `references/01-requirements/requirements-index.md` — 요구사항 전체 개요 (있으면 먼저 읽기)
+2. `references/01-requirements/requirements.md` — 요구사항 상세 (필요한 항목만 참조)
+3. `references/00-rfp/*/index.md` — RFP 구조화 인덱스
+4. `references/00-rfp/*/section-*.md` — RFP 원문 (필요 항목만)
 
 ### 2단계: 아키텍처 초안 작성
 

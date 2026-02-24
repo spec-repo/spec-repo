@@ -12,7 +12,7 @@ $ARGUMENTS 에 지정된 서브커맨드를 실행한다. 인자가 없으면 �
 - `/sp-req draft` — RFP → requirements.json 초안 + requirements.md 생성
 - `/sp-req import <excel-file>` — Excel → JSON 갱신 + MD 재생성
 - `/sp-req export [--version X.Y.Z]` — JSON → xlsx 내보내기
-- `/sp-req md` — requirements.md 재생성 (JSON은 변경 없음)
+- `/sp-req md` — requirements.md + requirements-index.md 재생성 (JSON은 변경 없음)
 - `/sp-req status` — 현황 확인
 
 ---
@@ -28,15 +28,16 @@ skills/sp-req/
     ├── parse-excel.py                # xlsx 파싱 → JSON/요약 (분석용)
     ├── excel-to-json.py              # xlsx → 01-requirements/requirements.json
     ├── json-to-excel.py              # requirements.json → xlsx
-    └── json-to-md.py                 # requirements.json → 01-requirements/requirements.md
+    └── json-to-md.py                 # requirements.json → requirements.md + requirements-index.md
 ```
 
 **프로젝트 내 파일 구조**:
 ```
 references/01-requirements/
-├── requirements.json    ← 진실의 원천 (git 추적, 직접 편집 금지)
-└── requirements.md      ← JSON에서 자동 생성 (git 추적, 직접 편집 금지)
-snapshots/requirements/  ← xlsx 스냅샷 (.gitignore 권장)
+├── requirements.json         ← 진실의 원천 (git 추적, 직접 편집 금지)
+├── requirements.md           ← JSON에서 자동 생성, 전체 상세 (직접 편집 금지)
+└── requirements-index.md     ← 인덱스 (자동 생성, 에이전트 overview용, 직접 편집 금지)
+snapshots/requirements/       ← xlsx 스냅샷 (.gitignore 권장)
 ```
 
 ---

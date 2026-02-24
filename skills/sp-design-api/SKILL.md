@@ -39,9 +39,10 @@ snapshots/api/      ← 내보낸 산출물 (.gitignore 권장)
 ### 1단계: 입력 문서 파악
 
 아래 순서로 파일을 탐색한다:
-1. `references/01-requirements/requirements.md` — 기능 요구사항 (API 연관 항목)
+1. `references/01-requirements/requirements-index.md` — 요구사항 전체 개요
 2. `references/02-design/아키텍처설계서.md` — 기술 스택, Base URL, 인증 방식
-3. `references/00-rfp/*/index.md` — RFP에서 API 관련 요건 (없으면 skip)
+3. `references/01-requirements/requirements.md` — API 연관 항목 상세 (필요 시)
+4. `references/00-rfp/*/index.md` — RFP에서 API 관련 요건 (없으면 skip)
 
 ### 2단계: API 구조 도출
 

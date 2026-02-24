@@ -30,6 +30,12 @@ def find_json_path(start_dir):
     return Path(start_dir).resolve() / "01-requirements" / "requirements.json"
 
 
+PREFIX_MAP = {
+    "PER": "성능", "SEC": "보안", "REL": "신뢰성",
+    "INT": "인터페이스", "CON": "제약사항", "QUA": "품질",
+}
+
+
 def _trunc(text, n=50):
     """셀 내용 줄바꿈 처리 및 길이 제한."""
     if not text:
@@ -81,6 +87,62 @@ def render_functional(items):
 
         lines.append("---")
         lines.append("")
+    return lines
+
+
+def render_index(functional, nonfunctional, version, last_upd):
+    """requirements-index.md 내용 생성."""
+    lines = []
+    lines.append("# 요구사항 인덱스")
+    lines.append("")
+    lines.append(
+        f"> **버전**: {version}"
+        f" | **기능**: {len(functional)}개"
+        f" | **비기능**: {len(nonfunctional)}개"
+        f" | **마지막 갱신**: {last_upd}"
+    )
+    lines.append("")
+    lines.append("> ⚠️ 이 파일은 `requirements.json`에서 자동 생성됩니다. 직접 편집하지 마세요.")
+    lines.append("")
+    lines.append("---")
+    lines.append("")
+
+    if functional:
+        lines.append(f"## 기능 요구사항 ({len(functional)}개)")
+        lines.append("")
+        lines.append("| ID | 제목 | 세부항목 수 | 우선순위 | 상태 |")
+        lines.append("|----|------|------------|---------|------|")
+        for item in functional:
+            subs = item.get("sub_requirements", [])
+            first = subs[0] if subs else {}
+            lines.append(
+                f"| {item.get('id', '')} "
+                f"| {_trunc(item.get('rfp_name', ''), 40)} "
+                f"| {len(subs)} "
+                f"| {first.get('priority', '')} "
+                f"| {first.get('status', '')} |"
+            )
+        lines.append("")
+
+    if nonfunctional:
+        lines.append(f"## 비기능 요구사항 ({len(nonfunctional)}개)")
+        lines.append("")
+        lines.append("| ID | 구분 | 제목 | 우선순위 | 상태 |")
+        lines.append("|----|------|------|---------|------|")
+        for item in nonfunctional:
+            subs = item.get("sub_requirements", [])
+            first = subs[0] if subs else {}
+            pid = item.get("id", "")
+            category = PREFIX_MAP.get(pid[:3], pid[:3])
+            lines.append(
+                f"| {pid} "
+                f"| {category} "
+                f"| {_trunc(item.get('rfp_name', ''), 40)} "
+                f"| {first.get('priority', '')} "
+                f"| {first.get('status', '')} |"
+            )
+        lines.append("")
+
     return lines
 
 
@@ -202,6 +264,12 @@ def main():
     print(f"✅ MD 생성 완료: {out_path}")
     print(f"   기능 요구사항:   {len(functional)}개")
     print(f"   비기능 요구사항: {len(nonfunctional)}개")
+
+    index_path = out_path.parent / "requirements-index.md"
+    index_lines = render_index(functional, nonfunctional, version, last_upd)
+    with open(index_path, "w", encoding="utf-8") as f:
+        f.write("\n".join(index_lines))
+    print(f"✅ 인덱스 생성 완료: {index_path}")
 
 
 if __name__ == "__main__":
