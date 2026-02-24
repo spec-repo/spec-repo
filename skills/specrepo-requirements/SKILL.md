@@ -84,7 +84,7 @@ JSON을 작성한 후 반드시 MD도 생성한다:
 python3 skills/specrepo-requirements/scripts/json-to-md.py
 ```
 
-### 4단계: git commit 제안
+### 4단계: git commit
 
 ```bash
 git add references/requirements.json references/requirements.md
@@ -122,7 +122,8 @@ python3 skills/specrepo-requirements/scripts/json-to-md.py
 
 **버전 파싱**: 파일명에 `_0.7.8`, `_v0.7.8`, `_0.7.8v` 패턴이 있으면 자동 추출.
 
-import 완료 후 git commit:
+### git commit
+
 ```bash
 git add references/requirements.json references/requirements.md
 git commit -m "feat: 요구사항 임포트 v{version} ({source})"
