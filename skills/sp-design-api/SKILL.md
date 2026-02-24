@@ -158,10 +158,16 @@ Mermaid 다이어그램을 PNG로 자동 변환 후 출력한다.
 
 # Word(.docx)
 ./scripts/export-docx.sh API명세서
-./scripts/export-docx.sh API명세서 1.0.0   # 버전 명시
+./scripts/export-docx.sh API명세서 1.0.0
+
+# 한글(.hwpx)
+./scripts/export-hwpx.sh API명세서
+./scripts/export-hwpx.sh API명세서 1.0.0
 ```
 
-`references/02-design/_template.docx`가 있으면 자동으로 커스텀 Word 템플릿을 적용한다.
+각 형식별 `_template.{ext}` 파일이 `references/02-design/`에 있으면 자동으로 커스텀 템플릿을 적용한다.
+
+> hwpx 요건: `pip install pypandoc-hwpx` + `sudo apt install pandoc`
 
 출력 경로: `snapshots/02-design/API명세서[_v{version}]_{YYYYMMDD}.{ext}`
 

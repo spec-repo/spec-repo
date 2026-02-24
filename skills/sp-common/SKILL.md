@@ -1,11 +1,11 @@
 ---
 name: sp-common
-description: "spec-repo 공통 유틸리티 스킬. tag.sh(문서 버전 태깅), export-pdf.sh(MD→PDF 변환), extract-pdf.sh(PDF 텍스트 추출) 스크립트를 제공하며, 다른 spec-* 스킬이 내부적으로 활용한다."
+description: "spec-repo 공통 유틸리티 스킬. tag.sh(문서 버전 태깅), export-pdf.sh(MD→PDF), export-docx.sh(MD→docx), export-hwpx.sh(MD→한글), preprocess-mermaid.py(Mermaid→PNG), extract-pdf.sh(PDF 텍스트 추출) 스크립트를 제공하며, 다른 sp-* 스킬이 내부적으로 활용한다."
 ---
 
 # spec-common — 공통 유틸리티
 
-이 스킬은 직접 호출하지 않는다. `spec-req`, `spec-design-arch`, `spec-rfp` 등 다른 spec-* 스킬이 내부적으로 사용하는 공통 스크립트 모음이다.
+이 스킬은 직접 호출하지 않는다. `sp-req`, `sp-design-arch`, `sp-rfp` 등 다른 sp-* 스킬이 내부적으로 사용하는 공통 스크립트 모음이다.
 
 ## 제공 스크립트
 
@@ -45,6 +45,30 @@ description: "spec-repo 공통 유틸리티 스킬. tag.sh(문서 버전 태깅)
 
 출력: `snapshots/{문서명}_{날짜}[.{상태}].pdf`
 
+### `./scripts/export-docx.sh` — MD → Word(.docx) 변환
+
+Mermaid 전처리 포함. `_template.docx`가 있으면 자동 적용.
+
+```bash
+./scripts/export-docx.sh <문서명> [버전]
+```
+
+사전 요건: `sudo apt install pandoc`
+
+### `./scripts/export-hwpx.sh` — MD → 아래아 한글(.hwpx) 변환
+
+Mermaid 전처리 포함. `_template.hwpx`가 있으면 자동 적용.
+
+```bash
+./scripts/export-hwpx.sh <문서명> [버전]
+```
+
+사전 요건: `pip install pypandoc-hwpx` + `sudo apt install pandoc`
+
+### `./scripts/preprocess-mermaid.py` — Mermaid 코드블록 → PNG 전처리
+
+` ```mermaid ``` ` 블록을 `mmdc`로 PNG 변환 후 `![](path.png)`으로 교체한 임시 MD 파일 경로를 stdout 출력. export-pdf/docx/hwpx.sh가 내부적으로 호출한다.
+
 ### `./scripts/extract-pdf.sh` — PDF 텍스트 추출
 
 ```bash
@@ -56,9 +80,9 @@ description: "spec-repo 공통 유틸리티 스킬. tag.sh(문서 버전 태깅)
 ## 스킬 간 의존 관계
 
 ```
-spec-rfp        → extract-pdf.sh (PDF 임포트 시)
-spec-req        → tag.sh, export-pdf.sh
-spec-design-arch → tag.sh, export-pdf.sh
-spec-design-api  → tag.sh, export-pdf.sh
-spec-design-db   → tag.sh, export-pdf.sh
+sp-rfp         → extract-pdf.sh (PDF 임포트 시)
+sp-req         → tag.sh, export-pdf.sh
+sp-design-arch → tag.sh, export-pdf.sh, export-docx.sh, export-hwpx.sh
+sp-design-api  → tag.sh, export-pdf.sh, export-docx.sh, export-hwpx.sh
+sp-design-db   → tag.sh, export-pdf.sh, export-docx.sh, export-hwpx.sh
 ```

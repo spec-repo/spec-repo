@@ -160,16 +160,26 @@ Mermaid 다이어그램을 PNG로 자동 변환 후 PDF를 생성한다.
 Mermaid 다이어그램을 PNG로 자동 변환 후 docx를 생성한다.
 
 ```bash
-# 기본 변환
 ./scripts/export-docx.sh 아키텍처설계서
-
-# 버전 명시
-./scripts/export-docx.sh 아키텍처설계서 1.0.0
+./scripts/export-docx.sh 아키텍처설계서 1.0.0   # 버전 명시
 ```
 
-`references/02-design/_template.docx`가 있으면 자동으로 커스텀 Word 템플릿(결재란·로고 등)을 적용한다.
+`references/02-design/_template.docx`가 있으면 자동으로 커스텀 템플릿을 적용한다.
 
-> 사전 요건: `sudo apt install pandoc`  (Ubuntu/WSL)
+> 사전 요건: `sudo apt install pandoc`
+
+### 한글(.hwpx) 내보내기
+
+Mermaid 다이어그램을 PNG로 자동 변환 후 hwpx를 생성한다.
+
+```bash
+./scripts/export-hwpx.sh 아키텍처설계서
+./scripts/export-hwpx.sh 아키텍처설계서 1.0.0   # 버전 명시
+```
+
+`references/02-design/_template.hwpx`가 있으면 자동으로 커스텀 한글 템플릿(결재란·로고 등)을 적용한다.
+
+> 사전 요건: `pip install pypandoc-hwpx` + `sudo apt install pandoc`
 
 출력 파일 기본 경로: `snapshots/02-design/아키텍처설계서[_v{version}]_{YYYYMMDD}.{ext}`
 
