@@ -1,5 +1,5 @@
 ---
-name: specrepo-requirements
+name: spec-req
 description: "요구사항정의서 관리. RFP에서 초안 도출(draft), Excel 임포트(import), xlsx 내보내기(export), MD 재생성(md), 현황 확인(status)을 지원한다."
 metadata:
   author: spec-repo
@@ -9,18 +9,18 @@ metadata:
 $ARGUMENTS 에 지정된 서브커맨드를 실행한다. 인자가 없으면 사용법을 안내한다.
 
 **사용법**:
-- `/specrepo-requirements draft` — RFP → requirements.json 초안 + requirements.md 생성
-- `/specrepo-requirements import <excel-file>` — Excel → JSON 갱신 + MD 재생성
-- `/specrepo-requirements export [--version X.Y.Z]` — JSON → xlsx 내보내기
-- `/specrepo-requirements md` — requirements.md 재생성 (JSON은 변경 없음)
-- `/specrepo-requirements status` — 현황 확인
+- `/spec-req draft` — RFP → requirements.json 초안 + requirements.md 생성
+- `/spec-req import <excel-file>` — Excel → JSON 갱신 + MD 재생성
+- `/spec-req export [--version X.Y.Z]` — JSON → xlsx 내보내기
+- `/spec-req md` — requirements.md 재생성 (JSON은 변경 없음)
+- `/spec-req status` — 현황 확인
 
 ---
 
 ## 파일 구조
 
 ```
-skills/specrepo-requirements/
+skills/spec-req/
 ├── data/requirements-template.xlsx   # 표준 템플릿
 └── scripts/
     ├── sheet_styles.py               # Excel 스타일 공통 모듈
@@ -81,7 +81,7 @@ RFP 내용에서 기능/비기능 요구사항을 추출한다.
 JSON을 작성한 후 반드시 MD도 생성한다:
 
 ```bash
-python3 skills/specrepo-requirements/scripts/json-to-md.py
+python3 skills/spec-req/scripts/json-to-md.py
 ```
 
 ### 4단계: git commit + draft 태그
@@ -100,18 +100,18 @@ xlsx 파일을 파싱해 `requirements.json`을 갱신하고 `requirements.md`�
 
 ```bash
 # 기본 (upsert)
-uv run --with openpyxl python3 skills/specrepo-requirements/scripts/excel-to-json.py <excel-file>
+uv run --with openpyxl python3 skills/spec-req/scripts/excel-to-json.py <excel-file>
 
 # 전체 교체
-uv run --with openpyxl python3 skills/specrepo-requirements/scripts/excel-to-json.py <excel-file> --merge replace
+uv run --with openpyxl python3 skills/spec-req/scripts/excel-to-json.py <excel-file> --merge replace
 
 # 신규 ID만 추가
-uv run --with openpyxl python3 skills/specrepo-requirements/scripts/excel-to-json.py <excel-file> --merge append
+uv run --with openpyxl python3 skills/spec-req/scripts/excel-to-json.py <excel-file> --merge append
 ```
 
 **import 후 반드시 MD 재생성**:
 ```bash
-python3 skills/specrepo-requirements/scripts/json-to-md.py
+python3 skills/spec-req/scripts/json-to-md.py
 ```
 
 **merge 전략**:
@@ -148,13 +148,13 @@ git commit -m "feat: 요구사항 임포트 v{version} ({source})"
 
 ```bash
 # 기본 (JSON version + 오늘 날짜로 파일명 자동 결정)
-uv run --with openpyxl python3 skills/specrepo-requirements/scripts/json-to-excel.py
+uv run --with openpyxl python3 skills/spec-req/scripts/json-to-excel.py
 
 # 버전 오버라이드
-uv run --with openpyxl python3 skills/specrepo-requirements/scripts/json-to-excel.py --version 1.0.0
+uv run --with openpyxl python3 skills/spec-req/scripts/json-to-excel.py --version 1.0.0
 
 # 경로 직접 지정
-uv run --with openpyxl python3 skills/specrepo-requirements/scripts/json-to-excel.py \
+uv run --with openpyxl python3 skills/spec-req/scripts/json-to-excel.py \
   --input 01-requirements/requirements.json \
   --out snapshots/requirements/export.xlsx
 ```
@@ -168,7 +168,7 @@ uv run --with openpyxl python3 skills/specrepo-requirements/scripts/json-to-exce
 JSON을 변경하지 않고 MD만 재생성할 때 사용한다.
 
 ```bash
-python3 skills/specrepo-requirements/scripts/json-to-md.py
+python3 skills/spec-req/scripts/json-to-md.py
 ```
 
 ---
@@ -191,10 +191,10 @@ import 전에 Excel 구조를 먼저 파악할 때:
 
 ```bash
 # 전체 요약
-uv run --with openpyxl python3 skills/specrepo-requirements/scripts/parse-excel.py <파일경로> --summary
+uv run --with openpyxl python3 skills/spec-req/scripts/parse-excel.py <파일경로> --summary
 
 # 특정 시트만
-uv run --with openpyxl python3 skills/specrepo-requirements/scripts/parse-excel.py <파일경로> --sheet 기능_요구사항
+uv run --with openpyxl python3 skills/spec-req/scripts/parse-excel.py <파일경로> --sheet 기능_요구사항
 ```
 
 ---
@@ -203,6 +203,6 @@ uv run --with openpyxl python3 skills/specrepo-requirements/scripts/parse-excel.
 
 표준 템플릿 초기화:
 ```bash
-uv run --with openpyxl python3 skills/specrepo-requirements/scripts/create-template.py
+uv run --with openpyxl python3 skills/spec-req/scripts/create-template.py
 ```
-→ `skills/specrepo-requirements/data/requirements-template.xlsx` 생성
+→ `skills/spec-req/data/requirements-template.xlsx` 생성

@@ -30,10 +30,10 @@ description: "{{PROJECT_NAME}} 프로젝트 요구사항·설계 산출물. 기�
 
 | 문서 | 스킬 | 관리 방식 |
 |------|------|---------|
-| 요구사항정의서 | `/specrepo-requirements` | MD + JSON (Excel 입출력) |
-| 아키텍처설계서 | `/specrepo-architecture` | MD (PDF/docx 내보내기) |
-| API명세서 | `/specrepo-api` | MD (OpenAPI sync, PDF/docx 내보내기) |
-| DB설계서 | `/specrepo-db` | MD (DDL 생성, PDF/docx 내보내기) |
+| 요구사항정의서 | `/spec-req` | MD + JSON (Excel 입출력) |
+| 아키텍처설계서 | `/spec-design-arch` | MD (PDF/docx 내보내기) |
+| API명세서 | `/spec-design-api` | MD (OpenAPI sync, PDF/docx 내보내기) |
+| DB설계서 | `/spec-design-db` | MD (DDL 생성, PDF/docx 내보내기) |
 
 > 스킬 없이 직접 편집도 가능. 스킬은 draft 초안 생성, import/export 자동화, 버전 태깅을 지원한다.
 

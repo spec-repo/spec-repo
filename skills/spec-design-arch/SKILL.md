@@ -1,5 +1,5 @@
 ---
-name: specrepo-architecture
+name: spec-design-arch
 description: "시스템아키텍처정의서 관리. RFP·요구사항 기반 초안 도출(draft), 기존 문서 임포트(import), PDF/docx 내보내기(export), 현황 확인(status)을 지원한다."
 metadata:
   author: spec-repo
@@ -9,17 +9,17 @@ metadata:
 $ARGUMENTS 에 지정된 서브커맨드를 실행한다. 인자가 없으면 사용법을 안내한다.
 
 **사용법**:
-- `/specrepo-architecture draft` — RFP + 요구사항 → 아키텍처설계서.md 초안 생성
-- `/specrepo-architecture import <file>` — 기존 PDF/docx → MD 구조화
-- `/specrepo-architecture export [--format pdf|docx]` — MD → 산출물 파일 생성
-- `/specrepo-architecture status` — 현황 확인
+- `/spec-design-arch draft` — RFP + 요구사항 → 아키텍처설계서.md 초안 생성
+- `/spec-design-arch import <file>` — 기존 PDF/docx → MD 구조화
+- `/spec-design-arch export [--format pdf|docx]` — MD → 산출물 파일 생성
+- `/spec-design-arch status` — 현황 확인
 
 ---
 
 ## 파일 구조
 
 ```
-skills/specrepo-architecture/
+skills/spec-design-arch/
 └── data/
     └── 아키텍처설계서-template.md    # 표준 템플릿 (draft 시 Read해서 구조 파악)
 ```
@@ -69,7 +69,7 @@ RFP와 요구사항에서 다음 정보를 추출해 `아키텍처설계서.md`�
 
 ### 3단계: 템플릿 기반 작성
 
-`skills/specrepo-architecture/data/아키텍처설계서-template.md`를 Read해서 섹션 구조를 파악한 후, 프로젝트에 맞게 내용을 채워 `references/02-design/아키텍처설계서.md`를 생성한다.
+`skills/spec-design-arch/data/아키텍처설계서-template.md`를 Read해서 섹션 구조를 파악한 후, 프로젝트에 맞게 내용을 채워 `references/02-design/아키텍처설계서.md`를 생성한다.
 
 ### 4단계: front matter 업데이트
 

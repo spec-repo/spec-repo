@@ -1,6 +1,6 @@
 ---
-name: specrepo-intake
-description: "RFP 또는 참고 문서를 등록하고 txt 추출 및 섹션 분리까지 수행합니다. 사용법: /specrepo-intake <파일경로>"
+name: spec-rfp
+description: "RFP 또는 참고 문서를 등록하고 txt 추출 및 섹션 분리까지 수행합니다. 사용법: /spec-rfp <파일경로>"
 metadata:
   author: spec-repo
   version: "1.0"
@@ -8,8 +8,8 @@ metadata:
 
 $ARGUMENTS 에 지정된 파일을 처리한다. 인자가 없으면 사용법을 안내한다.
 
-**사용법**: `/specrepo-intake <파일경로>`
-예) `/specrepo-intake ./rfp.pdf`, `/specrepo-intake references/00-rfp/견적요청서.pdf`
+**사용법**: `/spec-rfp <파일경로>`
+예) `/spec-rfp ./rfp.pdf`, `/spec-rfp references/00-rfp/견적요청서.pdf`
 
 ---
 
@@ -86,5 +86,5 @@ git commit -m "docs: RFP 등록 및 섹션 분리 — <파일명>"
 - 생성된 파일 목록 (`references/00-rfp/<파일명>/` 하위)
 - index.md 내용 미리보기
 - 다음 단계 안내:
-  - 요구사항이 아직 없으면: `/specrepo-requirements draft` — RFP 섹션을 분석해 요구사항 초안 자동 작성
-  - 외부에서 작성된 요구사항정의서 Excel이 있으면: `/specrepo-requirements import <파일경로>` — Excel → JSON 변환 후 관리 시작
+  - 요구사항이 아직 없으면: `/spec-req draft` — RFP 섹션을 분석해 요구사항 초안 자동 작성
+  - 외부에서 작성된 요구사항정의서 Excel이 있으면: `/spec-req import <파일경로>` — Excel → JSON 변환 후 관리 시작
