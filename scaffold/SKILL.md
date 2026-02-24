@@ -24,16 +24,14 @@ description: "{{PROJECT_NAME}} 프로젝트 요구사항·설계 산출물. 기�
 - `코드 = ✗` 문서는 프로세스·관리 질문에만 참조한다
 - 문서 수정 후 사람에게 확인을 받고 `scripts/tag.sh` 를 실행한다
 
-## 문서 관리 스킬
+## 문서 관리 커맨드
 
-각 문서 유형별로 전용 스킬이 제공된다:
-
-| 문서 | 스킬 | 관리 방식 |
-|------|------|---------|
-| 요구사항정의서 | `/sp-req` | MD + JSON (Excel 입출력) |
-| 아키텍처설계서 | `/sp-design-arch` | MD (PDF/docx 내보내기) |
-| API명세서 | `/sp-design-api` | MD (OpenAPI sync, PDF/docx 내보내기) |
-| DB설계서 | `/sp-design-db` | MD (DDL 생성, PDF/docx 내보내기) |
+| 커맨드 | 설명 |
+|--------|------|
+| `/spec-import <파일>` | 문서 파일(pdf/docx/hwpx/xlsx/md) 등록·갱신 |
+| `/spec-import draft <유형>` | 기존 references 기반 AI 초안 생성 |
+| `/spec-export <문서명>` | 납품용 파일 생성 |
+| `/spec-help` | 사용 가이드 |
 
 > 스킬 없이 직접 편집도 가능. 스킬은 draft 초안 생성, import/export 자동화, 버전 태깅을 지원한다.
 

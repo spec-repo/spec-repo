@@ -30,8 +30,9 @@ const m = {
   snapshots/            ${dim('납품용 스냅샷 (gitignore)')}
 
   ${b('다음 단계')}
-  1  사용 중인 에이전트에서 ${cyan('/sp-rfp')} ${dim('<rfp파일>')} 을 실행하세요
-     RFP 파일 경로를 함께 전달하면 자동으로 등록하고 분석해드립니다
+  1  사용 중인 에이전트에서 ${cyan('/spec-import')} ${dim('<파일>')} 을 실행하세요
+     문서 파일(pdf/docx/hwpx/xlsx/md)을 전달하면 마스터로 변환·등록합니다
+  2  사용법 확인: ${cyan('/spec-help')}
 `,
 };
 

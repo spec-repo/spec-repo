@@ -6,3 +6,6 @@ node_modules
 
 # 생성된 결과물 스냅샷 — 재생성 가능하므로 커밋 불필요
 snapshots/
+
+# 외부 파일 임시 저장소 — import 처리 중 중간 파일 보관
+tmp/

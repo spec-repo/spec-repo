@@ -19,13 +19,10 @@ function copyDir(src, dest) {
 function scaffoldProject(targetDir, projectName) {
   const scaffoldSrc = path.join(__dirname, '../../scaffold');
 
-  // 디렉토리 구조 생성
+  // 디렉토리 구조 생성 (scaffold copyDir로 생성되지 않는 것들)
   const dirs = [
-    '00-rfp',
     'snapshots',
-    'references',
-    'scripts',
-    'templates',
+    'tmp',
   ];
   for (const dir of dirs) {
     fs.mkdirSync(path.join(targetDir, dir), { recursive: true });
