@@ -12,7 +12,7 @@ src/commands/create.js    spec-repo create 구현
 src/commands/update.js    spec-repo update 구현
 src/utils/scaffold.js     파일 복사 + 플레이스홀더 치환
 scaffold/                 한국어 스캐폴드 원본
-skills/                   에이전트 스킬 원본 (sp-rfp, sp-req, sp-design-arch, sp-design-api, sp-design-db)
+skills/                   에이전트 스킬 원본 (spec-import, spec-export, spec-help, sp-common)
 ```
 
 ## 커맨드 동작 요약

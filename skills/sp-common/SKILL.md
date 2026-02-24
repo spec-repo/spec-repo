@@ -1,11 +1,11 @@
 ---
 name: sp-common
-description: "spec-repo 공통 유틸리티 스킬. tag.sh(문서 버전 태깅), export-pdf.sh(MD→PDF), export-docx.sh(MD→docx), export-hwpx.sh(MD→한글), preprocess-mermaid.py(Mermaid→PNG), extract-pdf.sh(PDF 텍스트 추출) 스크립트를 제공하며, 다른 sp-* 스킬이 내부적으로 활용한다."
+description: "spec-repo 공통 유틸리티 스킬. tag.sh(문서 버전 태깅), export-pdf.sh(MD→PDF), export-docx.sh(MD→docx), export-hwpx.sh(MD→한글), preprocess-mermaid.py(Mermaid→PNG), extract-pdf.sh(PDF 텍스트 추출), extract-docx.py(docx→MD), extract-hwpx.py(hwpx→MD) 스크립트를 제공하며, spec-import/spec-export 스킬이 내부적으로 활용한다."
 ---
 
-# spec-common — 공통 유틸리티
+# sp-common — 공통 유틸리티
 
-이 스킬은 직접 호출하지 않는다. `sp-req`, `sp-design-arch`, `sp-rfp` 등 다른 sp-* 스킬이 내부적으로 사용하는 공통 스크립트 모음이다.
+이 스킬은 직접 호출하지 않는다. `spec-import`, `spec-export` 스킬이 내부적으로 사용하는 공통 스크립트 모음이다.
 
 ## 제공 스크립트
 
@@ -77,12 +77,29 @@ Mermaid 전처리 포함. `_template.hwpx`가 있으면 자동 적용.
 
 `pdftotext`(poppler) 또는 `pdf-parse`(Node.js fallback) 순으로 시도.
 
+### `./scripts/extract-docx.py` — Word(.docx) → MD 변환
+
+```bash
+python3 scripts/extract-docx.py <docx-file> [output.md]
+```
+
+`python-docx` 1차 시도, 실패 시 `mammoth` fallback. 출력 경로 생략 시 stdout.
+
+사전 요건: `uv run --with python-docx ...` 또는 `uv run --with mammoth ...`
+
+### `./scripts/extract-hwpx.py` — 한글(.hwpx/.hwp) → MD 변환
+
+```bash
+python3 scripts/extract-hwpx.py <hwpx-file> [output.md]
+```
+
+`pyhwp2md` CLI 사용. 이미지 미지원 (텍스트만 추출).
+
+사전 요건: `pip install pyhwp2md`
+
 ## 스킬 간 의존 관계
 
 ```
-sp-rfp         → extract-pdf.sh (PDF 임포트 시)
-sp-req         → tag.sh, export-pdf.sh
-sp-design-arch → tag.sh, export-pdf.sh, export-docx.sh, export-hwpx.sh
-sp-design-api  → tag.sh, export-pdf.sh, export-docx.sh, export-hwpx.sh
-sp-design-db   → tag.sh, export-pdf.sh, export-docx.sh, export-hwpx.sh
+spec-import → extract-pdf.sh, extract-docx.py, extract-hwpx.py
+spec-export → tag.sh, export-pdf.sh, export-docx.sh, export-hwpx.sh
 ```
