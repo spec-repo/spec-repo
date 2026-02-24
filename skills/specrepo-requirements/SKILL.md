@@ -89,7 +89,7 @@ python3 skills/specrepo-requirements/scripts/json-to-md.py
 ```bash
 git add 01-requirements/requirements.json 01-requirements/requirements.md
 git commit -m "feat: 요구사항 초안 도출 (기능 N개, 비기능 M개)"
-./scripts/tag.sh draft 요구사항정의서
+./scripts/tag.sh draft 요구사항정의서 {_meta.version}   # requirements.json의 _meta.version 값
 ```
 
 ---
@@ -123,12 +123,22 @@ python3 skills/specrepo-requirements/scripts/json-to-md.py
 
 **버전 파싱**: 파일명에 `_0.7.8`, `_v0.7.8`, `_0.7.8v` 패턴이 있으면 자동 추출.
 
-### git commit
+### git commit + import 태그
 
 ```bash
 git add 01-requirements/requirements.json 01-requirements/requirements.md
 git commit -m "feat: 요구사항 임포트 v{version} ({source})"
+./scripts/tag.sh import 요구사항정의서 {version}
 ```
+
+**지원 형식**:  만 지원.
+
+**비지원 형식 수신 시**:
+| 수신 형식 | 처리 |
+|---------|------|
+|  | "이 문서는 xlsx 형식으로 관리됩니다" 안내 + 템플릿 제공 |
+|  | 직접 변환 불가, xlsx로 저장 후 재시도 안내 |
+| ,  | 지원 불가 명시, 수동 복사 후 xlsx로 저장 안내 |
 
 ---
 

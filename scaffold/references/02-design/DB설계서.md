@@ -3,6 +3,7 @@ title: DB설계서
 version: 0.1.0
 status: draft
 updated: {{DATE}}
+code-relevant: true
 based_on:
   requirements: ""
 ---
