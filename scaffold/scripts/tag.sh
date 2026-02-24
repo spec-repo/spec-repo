@@ -2,11 +2,13 @@
 # tag.sh — 문서 버전 태그 관리
 #
 # 사용법:
+#   ./scripts/tag.sh draft <문서명>     초안 생성 태그
 #   ./scripts/tag.sh review <문서명>    검토 요청 태그 + PDF 생성
 #   ./scripts/tag.sh approved <문서명>  고객 승인 태그 + PDF 생성
 #   ./scripts/tag.sh list               태그 목록 조회
 #
 # 예시:
+#   ./scripts/tag.sh draft 요구사항정의서
 #   ./scripts/tag.sh review 요구사항정의서
 #   ./scripts/tag.sh approved 요구사항정의서
 
@@ -18,7 +20,7 @@ DOC_NAME="${2:-}"
 TODAY=$(date +%Y-%m-%d)
 
 usage() {
-  echo "사용법: $0 <review|approved|list> [문서명]"
+  echo "사용법: $0 <draft|review|approved|list> [문서명]"
   exit 1
 }
 
@@ -32,10 +34,10 @@ fi
 [ -z "$DOC_NAME" ] && usage
 
 case "$ACTION" in
-  review|approved|rejected)
+  draft|review|approved|rejected)
     ;;
   *)
-    echo "오류: action은 review, approved, rejected 중 하나여야 합니다."
+    echo "오류: action은 draft, review, approved, rejected 중 하나여야 합니다."
     usage
     ;;
 esac

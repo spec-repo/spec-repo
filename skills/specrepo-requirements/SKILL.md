@@ -84,11 +84,12 @@ JSON을 작성한 후 반드시 MD도 생성한다:
 python3 skills/specrepo-requirements/scripts/json-to-md.py
 ```
 
-### 4단계: git commit
+### 4단계: git commit + draft 태그
 
 ```bash
 git add 01-requirements/requirements.json 01-requirements/requirements.md
 git commit -m "feat: 요구사항 초안 도출 (기능 N개, 비기능 M개)"
+./scripts/tag.sh draft 요구사항정의서
 ```
 
 ---
